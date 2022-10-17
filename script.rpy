@@ -9,6 +9,10 @@ image ctc_animation = Animation("images/ctcwhite.png", 0.5, "images/ctcblack.png
 # Creates the narrator as a character to enable the ctc animation
 define narrator = Character(ctc = "ctc_animation", ctc_position = "fixed")
 
+define s = Character("Snippy")
+
+image beast = "images/BEASTS/Beasts10.png"
+
 # The game starts here.
 
 label start:
@@ -16,6 +20,14 @@ label start:
     # Displays the background
     show UI onlayer master
 
-    "This is your new game!"
+    s "Hi there!"
+    show beast at truecenter
+    pause 0.1
+    hide beast
+    s "What was THAT?"
+    s "Oh well."
+    s "My name is Snippy!"
+    $ x = renpy.input("What's your name?")
+    s "Hi there, [x]!"
 
     return

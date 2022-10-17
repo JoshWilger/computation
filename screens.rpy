@@ -486,7 +486,7 @@ screen yesno_prompt(message, yes_action, no_action):
 screen quick_menu():
 
 #     Add an in-game quick menu.
-     hbox:
+    hbox:
         style_group "quick"
 
         xalign 1.0
