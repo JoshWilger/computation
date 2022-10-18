@@ -390,7 +390,7 @@ screen load():
         
 screen load_save_slot:
     $ file_text = "% 2s. %s\n%s" % (
-        FileSlotName(number, 4),
+        FileSlotName(number, 12),
         FileTime(number, empty=_("Empty Slot")),
         FileSaveName(number))
 
