@@ -23,11 +23,11 @@ init -1 python hide:
     ## This controls the title of the window, when Ren'Py is
     ## running in a window.
 
-    config.window_title = u"HYPERCARD"
+    config.window_title = u"Computation"
 
     # These control the name and version of the game, that are reported
     # with tracebacks and other debugging logs.
-    config.name = "HYPERCARD"
+    config.name = "Compuation"
     config.version = "1.0"
 
     #########################################
@@ -150,7 +150,7 @@ init -1 python hide:
 
     ## The default size of text.
 
-    style.default.size = 14
+    style.default.size = 12
     
     style.default.color = "#000000"
 
@@ -302,8 +302,8 @@ init -1 python hide:
     style.menu_choice_button.hover_background = Frame("images/choicehover.png", 220, 22)
     style.menu_choice.color = "#000000"
     style.menu_choice.hover_color = "#fff"
-    style.menu_choice.size = 12
-    style.menu_choice.hover_size = 12
+    style.menu_choice.size = 8
+    style.menu_choice.hover_size = 8
     style.menu_choice.xalign = 0.5
     style.menu_choice.hover_xalign = 0.5
     style.menu_choice.yminimum = 22
@@ -318,12 +318,12 @@ init python:
     ## The name that's used for directories and archive files. For example, if
     ## this is 'mygame-1.0', the windows distribution will be in the
     ## directory 'mygame-1.0-win', in the 'mygame-1.0-win.zip' file.
-    build.directory_name = "HYPERCARD-1.0"
+    build.directory_name = "Computation-1.0"
 
     ## The name that's uses for executables - the program that users will run
     ## to start the game. For example, if this is 'mygame', then on Windows,
     ## users can click 'mygame.exe' to start the game.
-    build.executable_name = "HYPERCARD"
+    build.executable_name = "Computation"
 
     ## If True, Ren'Py will include update information into packages. This
     ## allows the updater to run.

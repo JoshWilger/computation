@@ -113,7 +113,7 @@ screen input(prompt):
         has vbox
 
         text prompt style "input_prompt"
-        input id "input" style "input_text"
+        input id "input" color "#000" size 8
 
     use quick_menu
 
@@ -394,7 +394,7 @@ screen load_save_slot:
         FileTime(number, empty=_("Empty Slot")),
         FileSaveName(number))
 
-    text file_text xpos 37 ypos 10 size 10 color "#000000" font "ASSETS/ChicagoFLF.ttf"
+    text file_text xpos 37 ypos 10 size 8 color "#000000" font "ASSETS/M 8pt.ttf"
     
     key "save_delete" action FileDelete(number)
 
@@ -507,3 +507,15 @@ init -2:
         selected_hover_color "#cc0"
         insensitive_color "#4448"
 
+screen ctc(arg="Click to Continue", cps=None):
+
+    zorder 100
+
+    text _(arg):
+        size 12
+        xalign 0.0
+        yalign 0.0
+        slow_cps cps
+
+screen desktop(boot=False):
+    text "HELLO THERE CHILD"
