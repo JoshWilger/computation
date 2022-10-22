@@ -63,6 +63,7 @@ label bsod:
 label desktopy(loading=0.0):
     hide screen files
     hide screen desktop
+    hide screen txt
 
     show screen desktop(loading)
 
@@ -71,37 +72,66 @@ label desktopy(loading=0.0):
             call documents
         "{image=images/MAC SYSTEM/94.png}\nScrap":
             call scrap
-            
+
+    # "This is your desktop. You'll be seeing this a lot, as it is basically the home screen of the computer!" 
     return
 
 label documents:
     hide screen desktop
     hide screen files
+    hide screen txt
 
     show screen files("documents")
     
     menu:
         "{image=images/MAC SYSTEM/189.png}\nWelcome to Waffles.txt":
             call welcome
+        "{image=images/MAC SYSTEM/189.png}\nLorem Ipsum.txt":
+            call ipsum
         "{image=images/MAC SYSTEM/94.png}\nMysterious File":
             hide screen files
-
+    
+    # "Here is where all your documents are kept!"
     return
 
 label scrap:
     hide screen desktop
     hide screen files
+    hide screen txt
 
     show screen files("scrap")
 
+    "This file is currently empty!"
     return
 
 label welcome:
     hide screen desktop
     hide screen files
+    hide screen txt
 
     show screen txt("welcome")
 
+    "Here is a warm welcome from those at Waffles Inc.!"
+    return
+
+label ipsum:
+    hide screen desktop
+    hide screen files
+    hide screen txt
+
+    show screen txt("""
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ultricies, diam id vestibulum viverra, purus urna commodo dolor, sit amet vulputate mauris lorem nec lorem. Donec dapibus eget mauris ut malesuada. Praesent tincidunt enim nisi, in pulvinar mi tincidunt et. Phasellus at ultrices sem. Etiam eu purus lacus. Nunc ex nisi, volutpat ac tincidunt sed, pretium eu leo. Ut sodales euismod diam, et gravida nisi mattis at. Ut sed tortor efficitur dolor dignissim ultricies.
+
+Praesent congue dolor nunc, in viverra arcu mattis id. Suspendisse potenti. Sed accumsan in eros vel lobortis. Nulla tristique vitae ipsum vel dapibus. Pellentesque elementum et elit ut sodales. Aliquam pulvinar auctor justo. Aliquam vitae orci nec est mollis consectetur vitae in lacus. Morbi varius nulla quam, efficitur venenatis ante eleifend eu. Nullam feugiat sollicitudin iaculis. Donec suscipit dictum tellus, id pharetra nisl mollis et. Vivamus scelerisque dictum velit, ut porta mi dictum ut. Donec elementum ultrices justo, et efficitur felis eleifend ut. Integer ac libero urna. Ut ornare diam ut dolor tempus imperdiet sed ac enim. Donec dictum nisl et cursus malesuada.
+
+Suspendisse eget dolor sem. Quisque eget dui eu magna fermentum feugiat vitae semper tortor. Etiam volutpat, ex non mollis fringilla, dolor sapien dictum purus, vitae tempus libero sem id arcu. Proin vel lectus a risus pulvinar consectetur. Integer eros enim, ultricies ac diam id, egestas tempus nibh. Mauris id eros non ligula tristique hendrerit ac dapibus magna. Cras nec nisi vel magna accumsan hendrerit eget et dolor. Etiam sit amet vehicula quam, in tempor nunc. Suspendisse nec blandit nunc, ut auctor arcu. Nulla ante augue, rutrum vitae mi nec, efficitur facilisis est. Aliquam vulputate, mauris vel tincidunt sagittis, orci tortor sollicitudin ante, nec luctus nisl tellus a justo. Ut dictum in nisl at semper. Etiam consequat enim eu tortor efficitur, in malesuada enim accumsan.
+
+Donec fermentum feugiat viverra. Mauris accumsan vitae neque vitae posuere. Nullam nec volutpat orci. Pellentesque varius ac mi ac tempor. Aenean nec nibh in neque tristique fringilla non eget quam. Vivamus mi lorem, mattis vitae lectus non, interdum ullamcorper dolor. Duis ut imperdiet nunc, ut pretium libero. Praesent laoreet commodo ante, eu finibus turpis gravida ut. Suspendisse porta, sem sit amet dignissim malesuada, risus augue efficitur sem, sed condimentum massa elit in ex. In hac habitasse platea dictumst.
+
+Donec aliquam auctor quam, in malesuada mi tempus nec. Proin massa risus, auctor vel scelerisque et, venenatis vitae ipsum. Pellentesque mollis tellus nulla, non tincidunt quam congue a. In hac habitasse platea dictumst. Praesent porttitor dapibus hendrerit. Fusce quis libero commodo, luctus lacus sed, pulvinar mi. Donec in dapibus velit, eget posuere enim. Pellentesque aliquam, mauris ut fermentum tristique, nunc sapien lacinia sapien, at auctor quam ipsum et dui. Sed finibus mollis leo, in scelerisque diam.
+    """)
+
+    "This is a meaningless text file. Hope you can read Latin!"
     return
 
 label start:
