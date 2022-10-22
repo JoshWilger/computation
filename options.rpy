@@ -298,8 +298,8 @@ init -1 python hide:
     config.autosave_frequency = None
     
     #This is the custom choice menu, which you can customize below
-    style.menu_choice_button.background = Frame("images/choiceground.png", 220, 22)
-    style.menu_choice_button.hover_background = Frame("images/choicehover.png", 220, 22)
+    style.menu_choice_button.background = Frame("images/choiceground.png", 55, 22)
+    style.menu_choice_button.hover_background = Frame("images/choicehover.png", 55, 22)
     style.menu_choice.color = "#000000"
     style.menu_choice.hover_color = "#fff"
     style.menu_choice.size = 8
@@ -308,8 +308,9 @@ init -1 python hide:
     style.menu_choice.hover_xalign = 0.5
     style.menu_choice.yminimum = 22
     style.menu_choice.hover_yminimum = 22
-    style.menu_choice_button.xminimum = 220
+    style.menu_choice_button.xminimum = 55
     style.menu_choice_button.yminimum = 22
+    style.menu_choice_button.xmaximum = 55
 
 ## This section contains information about how to build your project into
 ## distribution files.

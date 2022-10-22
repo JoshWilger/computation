@@ -68,12 +68,12 @@ screen choice(items):
 
     window:
         style "menu_window"
-        xalign 0.5
-        yalign 0.5
+        xalign 0.01
+        yalign 0.01
 
         vbox:
             style "menu"
-            spacing 2
+            spacing 12
 
             for caption, action, chosen in items:
 
@@ -93,7 +93,7 @@ init -2:
 
     style menu_window is default
 
-    style menu_choice is button_text:
+    style menu_choice is input_prompt:
         clear
 
     style menu_choice_button is button:
@@ -517,5 +517,50 @@ screen ctc(arg="Click to Continue", cps=None):
         yalign 0.0
         slow_cps cps
 
-screen desktop(boot=False):
-    text "HELLO THERE CHILD"
+screen desktop(loading=0.0):
+    tag menu
+    
+    imagemap:
+        ground "images/cyan.png"
+        idle "images/cyan.png"
+        hover "images/cyan.png"
+
+        image "images/BORDERS/Border20.png" yzoom 3.0 xzoom 1.5 yalign 1.021 delay loading
+        # pause 0.1
+        image "images/BUTTONS & MENUS/RECTANGLE BUTTON SHADOW.png" xalign 0.005 yalign 0.993 delay loading
+        # pause 0.1
+        image "images/tab.png" xzoom 0.4 yzoom 0.8 xalign 0.2 yalign 0.985 delay loading
+        # pause 0.1
+        image "choiceground.png" xzoom 0.2 xalign 0.995 yalign 0.993 delay loading
+        # pause 0.1
+        $ now = datetime.now().strftime("%H:%M")
+        text "[now]":
+            xalign 0.984
+            yalign 0.984
+        # pause 0.1
+
+screen files(type):
+    modal True
+    
+    imagemap:
+        ground "IMAGES/base.png"
+        idle "IMAGES/base.png"
+        hover "IMAGES/base.png"
+        
+        hotspot (500, 1, 20, 20) action Call("desktopy")
+        image "images/ASSORTED ICONS/39.png" zoom 0.5 xalign 0.99 yalign 0.01
+
+screen txt(content=""):
+    modal True
+
+    imagemap:
+        ground "IMAGES/base.png"
+        idle "IMAGES/base.png"
+        hover "IMAGES/base.png"
+        
+        hotspot (500, 1, 20, 20) action Call("desktopy")
+        image "images/ASSORTED ICONS/39.png" zoom 0.5 xalign 0.99 yalign 0.01
+
+        image "txt.png"
+
+        input id "input" color "#000" size 8 default content
