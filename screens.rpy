@@ -68,8 +68,8 @@ screen choice(items):
 
     window:
         style "menu_window"
-        xalign 0.01
-        yalign 0.01
+        xalign 0.03
+        yalign 0.3
 
         vbox:
             style "menu"
@@ -550,7 +550,7 @@ screen files(type):
         hotspot (500, 1, 20, 20) action Call("desktopy")
         image "images/ASSORTED ICONS/39.png" zoom 0.5 xalign 0.99 yalign 0.01
 
-screen txt(content=""):
+screen txt(content, save_action):
     modal True
 
     imagemap:
@@ -558,9 +558,26 @@ screen txt(content=""):
         idle "IMAGES/base.png"
         hover "IMAGES/base.png"
         
-        hotspot (500, 1, 20, 20) action Call("desktopy")
+        hotspot (500, 1, 20, 20) action [save_action, Call("desktopy")]
         image "images/ASSORTED ICONS/39.png" zoom 0.5 xalign 0.99 yalign 0.01
 
         image "txt.png"
 
-        input id "input" color "#000" size 8 default content
+        input color "#000" size 8 xpos 175 ypos 70 xmaximum 217 ymaximum 200 default content id "id"
+
+init python:
+    from datetime import datetime
+
+    def save_welcome():
+        persistent.welcome_txt = renpy.get_displayable("txt", "id").content
+        renpy.save_persistent()
+    def save_ipsum():
+        persistent.ipsum_txt = renpy.get_displayable("txt", "id").content
+        renpy.save_persistent()
+    def save_blank():
+        persistent.blank_txt = renpy.get_displayable("txt", "id").content
+        renpy.save_persistent()
+
+init:
+    $ config.keymap['input_enter'].remove('K_RETURN')
+    $ config.keymap['input_enter'].remove('K_KP_ENTER')

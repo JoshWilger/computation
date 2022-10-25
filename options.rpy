@@ -12,6 +12,7 @@ init -1 python hide:
     ## Should we enable the use of developer tools? This should be
     ## set to False before the game is released, so the user can't
     ## cheat using developer tools.
+    #TODO: turn off developer tools for release
 
     config.developer = True
 
@@ -307,6 +308,7 @@ init -1 python hide:
     style.menu_choice.xalign = 0.5
     style.menu_choice.hover_xalign = 0.5
     style.menu_choice.yminimum = 22
+    style.menu_choice.xpos = 24
     style.menu_choice.hover_yminimum = 22
     style.menu_choice_button.xminimum = 55
     style.menu_choice_button.yminimum = 22
