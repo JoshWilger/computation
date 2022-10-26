@@ -9,7 +9,7 @@ image white = "images/white.png"# This sets up an animation for a flashing arrow
 image ctc_animation = Animation("images/ctcwhite.png", 0.5, "images/ctcblack.png", 0.5, xpos=0, ypos=0, xanchor=0, yanchor=0)
 
 # Creates the narrator as a character to enable the ctc animation
-define narrator = Character(ctc = "ctc_animation", ctc_position = "fixed")
+# define narrator = Character(ctc = "ctc_animation", ctc_position = "fixed")
 
 image logo = "images/ODDS AND ENDS/Odds58.png"
 image logo_background = "images/CARDS/Dynamic.png"
@@ -39,9 +39,9 @@ label bootup:
     hide logo
     hide logo_background
     pause 2.0
-    show screen ctc("{color=#FFF}_\n\nC:\\>SET BLASTER=A220 17 D1 H7 P330 T6\n\nC:\\>SET SBPC I=C:\\SBPCI\n\nC:/>\nC:\\SET Path=C:\\WAFFLES;C:\\WAFFLES\\COMMAND\n\nC:/>\nC:/>{/color}", cps=700)
+    show screen text_screen("{color=#FFF}_\n\nC:\\>SET BLASTER=A220 17 D1 H7 P330 T6\n\nC:\\>SET SBPC I=C:\\SBPCI\n\nC:/>\nC:\\SET Path=C:\\WAFFLES;C:\\WAFFLES\\COMMAND\n\nC:/>\nC:/>{/color}", cps=700)
     pause 4.0
-    hide screen ctc
+    hide screen text_screen
     pause 2.0
 
     return
@@ -49,7 +49,7 @@ label bootup:
 label bsod:
     $ gametime = str(renpy.get_game_runtime())
     show blue
-    show text ("{color=#FFF}{b}WAFFLES{/b}\n\nA fatal exception 0E has occurred at [gametime]. The current session will be terminated.\n\n   *    Press space to terminate the current session.\n*    Press ALT+F4 to restart the session. You will\n              lose any unsaved information in all applications. \n\nPress space to continue _{/color}"):
+    show text ("{color=#FFF}{b}WAFFLES{/b}\n\nA fatal exception 0E has occurred at [gametime]. The current session will be terminated.\n\n   *    Press space to terminate the current session.\n   *    Press ALT+F4 to restart the session. You will\n           lose any unsaved information in all applications. \n\nPress space to continue _{/color}"):
         xalign 0.4
         yalign 0.6
     pause
@@ -83,11 +83,11 @@ label documents:
     show screen files("documents")
     
     menu:
-        "{image=images/MAC SYSTEM/189.png}\nWelcome to Waffles.txt":
+        "{image=images/MAC SYSTEM/189.png}\nWelcome to Waffles.txt\n":
             call welcome
-        "{image=images/MAC SYSTEM/189.png}\nLorem Ipsum.txt":
+        "{image=images/MAC SYSTEM/189.png}\nLorem Ipsum.txt\n":
             call ipsum
-        "{image=images/MAC SYSTEM/94.png}\nMysterious File":
+        "{image=images/MAC SYSTEM/94.png}\nMysterious File\n":
             hide screen files
         "{image=images/MAC SYSTEM/189.png}\nblank.txt":
             call blank

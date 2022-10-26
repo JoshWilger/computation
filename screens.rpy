@@ -69,24 +69,25 @@ screen choice(items):
     window:
         style "menu_window"
         xalign 0.03
-        yalign 0.3
+        ypos 23
 
-        vbox:
-            style "menu"
-            spacing 12
-
+        draggroup:
             for caption, action, chosen in items:
 
                 if action:
-
-                    button:
-                        action action
-                        style "menu_choice_button"
+                    drag:
+                        draggable True
+                        drag_raise True
+                        style "menu_choice_button" 
+                        ymaximum 55
+                        clicked action
+                        # button style "menu_window" action action yminimum 30 ymaximum 30
 
                         text caption style "menu_choice"
 
                 else:
-                    text caption style "menu_caption"
+                    drag:
+                        text caption style "menu_caption"
 
 init -2:
     $ config.narrator_menu = True
@@ -507,12 +508,13 @@ init -2:
         selected_hover_color "#cc0"
         insensitive_color "#4448"
 
-screen ctc(arg="Click to Continue", cps=None):
+screen text_screen(arg="Click to Continue", cps=20):
 
     zorder 100
 
     text _(arg):
-        size 12
+        size 9
+        font "assets/ChicagoFLF.ttf"
         xalign 0.0
         yalign 0.0
         slow_cps cps
@@ -535,8 +537,8 @@ screen desktop(loading=0.0):
         # pause 0.1
         $ now = datetime.now().strftime("%H:%M")
         text "[now]":
-            xalign 0.984
-            yalign 0.984
+            xalign 0.98 # 0.984
+            yalign 0.98 # 0.984
         # pause 0.1
 
 screen files(type):
@@ -563,7 +565,7 @@ screen txt(content, save_action):
 
         image "txt.png"
 
-        input color "#000" size 8 xpos 175 ypos 70 xmaximum 217 ymaximum 200 default content id "id"
+        input color "#000" size 8 font "assets/ChicagoFLF.ttf" xpos 175 ypos 70 xmaximum 217 ymaximum 200 default content id "id"
 
 init python:
     from datetime import datetime

@@ -112,14 +112,14 @@ init -1 python hide:
 
     style.window.left_padding = 22
     style.window.right_padding = 23
-    style.window.top_padding = 283
+    style.window.top_padding = 153 #283
     style.window.bottom_padding = 18
 
     ## This is the minimum height of the window, including the margins
     ## and padding.
 
-    style.window.yminimum = 371
-
+    style.window.yminimum = 200
+    style.window.ymaximum = 371
 
     #########################################
     ## This lets you change the placement of the main menu.
@@ -146,12 +146,12 @@ init -1 python hide:
 
     ## The file containing the default font.
 
-    style.default.font = "ASSETS/ChicagoFLF.ttf"
+    style.default.font = "ASSETS/M 8pt.ttf"
     style.default.antialias = False
 
     ## The default size of text.
 
-    style.default.size = 12
+    style.default.size = 8
     
     style.default.color = "#000000"
 
@@ -299,20 +299,21 @@ init -1 python hide:
     config.autosave_frequency = None
     
     #This is the custom choice menu, which you can customize below
-    style.menu_choice_button.background = Frame("images/choiceground.png", 55, 22)
-    style.menu_choice_button.hover_background = Frame("images/choicehover.png", 55, 22)
+    style.menu_choice_button.background = Frame("images/choiceground.png", 60, 60)
+    style.menu_choice_button.hover_background = Frame("images/choicehover.png", 60, 60)
     style.menu_choice.color = "#000000"
-    style.menu_choice.hover_color = "#fff"
-    style.menu_choice.size = 8
-    style.menu_choice.hover_size = 8
-    style.menu_choice.xalign = 0.5
-    style.menu_choice.hover_xalign = 0.5
-    style.menu_choice.yminimum = 22
-    style.menu_choice.xpos = 24
-    style.menu_choice.hover_yminimum = 22
-    style.menu_choice_button.xminimum = 55
-    style.menu_choice_button.yminimum = 22
-    style.menu_choice_button.xmaximum = 55
+    style.menu_choice.hover_color = "#828282"
+    style.menu_choice.size = 6
+    style.menu_choice.hover_size = 6
+    # style.menu_choice.xalign = 0.5
+    # style.menu_choice.hover_xalign = 0.5
+    style.menu_choice.xpos = 3 #24
+    style.menu_choice.ypos = 5
+    # style.menu_choice.yminimum = 60
+    # style.menu_choice.hover_yminimum = 60
+    style.menu_choice_button.xminimum = 60
+    style.menu_choice_button.yminimum = 60
+    style.menu_choice_button.xmaximum = 60
 
 ## This section contains information about how to build your project into
 ## distribution files.
