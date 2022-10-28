@@ -68,10 +68,13 @@ screen choice(items):
 
     window:
         style "menu_window"
-        xalign 0.03
-        ypos 23
+        left_padding 10
+        right_padding 10
+        top_padding 26
+        bottom_padding 26
 
         draggroup:
+            $ i = 0
             for caption, action, chosen in items:
 
                 if action:
@@ -80,6 +83,7 @@ screen choice(items):
                         drag_raise True
                         style "menu_choice_button" 
                         ymaximum 55
+                        ypos (68 * i)
                         clicked action
                         # button style "menu_window" action action yminimum 30 ymaximum 30
 
@@ -88,6 +92,7 @@ screen choice(items):
                 else:
                     drag:
                         text caption style "menu_caption"
+                $ i += 1
 
 init -2:
     $ config.narrator_menu = True
@@ -114,7 +119,7 @@ screen input(prompt):
         has vbox
 
         text prompt style "input_prompt"
-        input id "input" color "#000" size 8
+        input id "input" color "#000" size 8 font "assets/ChicagoFLF.ttf"
 
     use quick_menu
 
@@ -508,15 +513,16 @@ init -2:
         selected_hover_color "#cc0"
         insensitive_color "#4448"
 
-screen text_screen(arg="Click to Continue", cps=20):
+screen text_screen(arg="Click to Continue", cps=20, xalign=0.0, yalign=0.0, color="#000"):
 
     zorder 100
 
     text _(arg):
         size 9
         font "assets/ChicagoFLF.ttf"
-        xalign 0.0
-        yalign 0.0
+        color color
+        xalign xalign
+        yalign yalign
         slow_cps cps
 
 screen desktop(loading=0.0):
@@ -560,12 +566,26 @@ screen txt(content, save_action):
         idle "IMAGES/base.png"
         hover "IMAGES/base.png"
         
-        hotspot (500, 1, 20, 20) action [save_action, Call("desktopy")]
+        hotspot (500, 1, 20, 20) action [save_action, Jump("desktopy")]
         image "images/ASSORTED ICONS/39.png" zoom 0.5 xalign 0.99 yalign 0.01
 
         image "txt.png"
+        image "images/COMMUNICATION/Communication2.png" xpos 222 ypos 51 zoom 0.5
 
-        input color "#000" size 8 font "assets/ChicagoFLF.ttf" xpos 175 ypos 70 xmaximum 217 ymaximum 200 default content id "id"
+        input color "#000" size 8 font "assets/ChicagoFLF.ttf" xpos 175 ypos 82 xmaximum 217 ymaximum 200 default content id "id"
+
+screen cmd():
+    modal True
+
+    imagemap:
+        ground "IMAGES/base.png"
+        idle "IMAGES/base.png"
+        hover "IMAGES/base.png"
+        
+        hotspot (500, 1, 20, 20) action Jump("desktopy")
+        image "images/ASSORTED ICONS/39.png" zoom 0.5 xalign 0.99 yalign 0.01
+
+        image "black.png"
 
 init python:
     from datetime import datetime
@@ -579,7 +599,3 @@ init python:
     def save_blank():
         persistent.blank_txt = renpy.get_displayable("txt", "id").content
         renpy.save_persistent()
-
-init:
-    $ config.keymap['input_enter'].remove('K_RETURN')
-    $ config.keymap['input_enter'].remove('K_KP_ENTER')

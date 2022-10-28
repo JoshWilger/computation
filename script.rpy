@@ -63,16 +63,20 @@ label desktopy(loading=0.0):
     hide screen files
     hide screen desktop
     hide screen txt
+    hide screen cmd
+    hide screen text_screen
 
     show screen desktop(loading)
 
     menu:
         "{image=images/MAC SYSTEM/Mac20.png}\nDocuments":
             call documents
-        "{image=images/MAC SYSTEM/94.png}\nScrap":
+        "{image=images/MAC SYSTEM/221.png}\nScrap":
             call scrap
+        "{image=images/MAC SYSTEM/187.png}\nCommand Input":
+            call cmd
 
-    # "This is your desktop. You'll be seeing this a lot, as it is basically the home screen of the computer!" 
+    # "This is your desktop. You'll be seeing this a lot, as it is basically the home screen of the computer!"
     return
 
 label documents:
@@ -83,11 +87,11 @@ label documents:
     show screen files("documents")
     
     menu:
-        "{image=images/MAC SYSTEM/189.png}\nWelcome to Waffles.txt\n":
+        "{image=images/MAC SYSTEM/189.png}\nWelcome to Waffles.txt":
             call welcome
-        "{image=images/MAC SYSTEM/189.png}\nLorem Ipsum.txt\n":
+        "{image=images/MAC SYSTEM/189.png}\nLorem Ipsum.txt":
             call ipsum
-        "{image=images/MAC SYSTEM/94.png}\nMysterious File\n":
+        "{image=images/MAC SYSTEM/94.png}\nMysterious File":
             hide screen files
         "{image=images/MAC SYSTEM/189.png}\nblank.txt":
             call blank
@@ -112,7 +116,9 @@ label welcome:
 
     show screen txt(persistent.welcome_txt, save_welcome)
 
-    "Here is a warm welcome from those at Waffles Inc.!"
+    while True:
+        "Here is a warm welcome from those at Waffles Inc.!"
+
     return
 
 label ipsum:
@@ -122,7 +128,9 @@ label ipsum:
 
     show screen txt(persistent.ipsum_txt, save_ipsum)
 
-    "This is a meaningless text file. Hope you can read Latin!"
+    while True:
+        "This is a meaningless text file. Hope you can read Latin!"
+
     return
 
 label blank:
@@ -132,7 +140,24 @@ label blank:
 
     show screen txt(persistent.blank_txt, save_blank)
 
-    "A blank page is an opportunity for creativity..."
+    while True:
+        "A blank page is an opportunity for creativity..."
+    return
+
+label cmd:
+    hide screen desktop
+    hide screen files
+    hide screen txt
+    hide screen cmd
+    hide screen text_screen
+
+    show screen cmd()
+
+    $ commands = ""
+    while True:
+        $ commands += renpy.input("Tell the computer to do things:") + "\n"
+        show screen text_screen(commands, cps=0, xalign=0.03, yalign=0.08, color="#FFF")
+
     return
 
 label start:
