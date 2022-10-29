@@ -16,6 +16,12 @@ image logo_background = "images/CARDS/Dynamic.png"
 image load = "images/BORDERS/Border16.png"
 
 image snippy = "images/ASSORTED ICONS/87.png"
+image clipster = "images/COMMUNICATION/Communication2.png"
+image wally = "images/MAC SYSTEM/184.png" 
+
+define s = Character("Snippy", ctc = "ctc_animation", ctc_position = "fixed")
+define c = Character("Clipster", image="images/COMMUNICATION/Communication2.png")
+define w = Character("Wally", image="images/MAC SYSTEM/184.png", screen="cmd")
 
 define persistent.welcome_txt = "Welcome to Waffles! We're glad your here and wish you the best with the use of our product!"
 define persistent.ipsum_txt = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ultricies, diam id vestibulum viverra, purus urna commodo dolor, sit amet vulputate mauris lorem nec lorem. Donec dapibus eget mauris ut malesuada. Praesent tincidunt enim nisi, in pulvinar mi tincidunt et. Phasellus at ultrices sem. Etiam eu purus lacus. Nunc ex nisi, volutpat ac tincidunt sed, pretium eu leo. Ut sodales euismod diam, et gravida nisi mattis at. Ut sed tortor efficitur dolor dignissim ultricies."
@@ -65,14 +71,16 @@ label desktopy(loading=0.0):
     hide screen txt
     hide screen cmd
     hide screen text_screen
+    hide clipster
+    hide wally
 
     show screen desktop(loading)
 
     menu:
         "{image=images/MAC SYSTEM/Mac20.png}\nDocuments":
             call documents
-        "{image=images/MAC SYSTEM/221.png}\nScrap":
-            call scrap
+        "{image=images/MAC SYSTEM/221.png}\nJunk":
+            call junk
         "{image=images/MAC SYSTEM/187.png}\nCommand Input":
             call cmd
 
@@ -83,6 +91,8 @@ label documents:
     hide screen desktop
     hide screen files
     hide screen txt
+    hide clipster
+    hide wally
 
     show screen files("documents")
     
@@ -99,12 +109,12 @@ label documents:
     # "Here is where all your documents are kept!"
     return
 
-label scrap:
+label junk:
     hide screen desktop
     hide screen files
     hide screen txt
 
-    show screen files("scrap")
+    show screen files("junk")
 
     "This file is currently empty!"
     return
@@ -150,8 +160,9 @@ label cmd:
     hide screen txt
     hide screen cmd
     hide screen text_screen
+    
+    show screen cmd(w)
 
-    show screen cmd()
 
     $ commands = ""
     while True:

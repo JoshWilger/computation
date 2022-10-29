@@ -561,6 +561,8 @@ screen files(type):
 screen txt(content, save_action):
     modal True
 
+    # key "mouseup_3" action Show()
+
     imagemap:
         ground "IMAGES/base.png"
         idle "IMAGES/base.png"
@@ -574,7 +576,7 @@ screen txt(content, save_action):
 
         input color "#000" size 8 font "assets/ChicagoFLF.ttf" xpos 175 ypos 82 xmaximum 217 ymaximum 200 default content id "id"
 
-screen cmd():
+screen cmd(character):
     modal True
 
     imagemap:
@@ -586,9 +588,12 @@ screen cmd():
         image "images/ASSORTED ICONS/39.png" zoom 0.5 xalign 0.99 yalign 0.01
 
         image "black.png"
+        image "images/MAC SYSTEM/184.png" xalign 0.9 yalign 0.9
 
 init python:
     from datetime import datetime
+
+    config.keymap['game_menu'].remove('mouseup_3')
 
     def save_welcome():
         persistent.welcome_txt = renpy.get_displayable("txt", "id").content
