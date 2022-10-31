@@ -571,12 +571,23 @@ screen txt(content, save_action):
         hover "IMAGES/base.png"
         
         hotspot (500, 1, 20, 20) action [save_action, Jump("desktopy")]
-        image "images/ASSORTED ICONS/39.png" zoom 0.5 xalign 0.99 yalign 0.01
-
         image "txt.png"
-        drag:
-            draggable True xpos 222 ypos 51
-            image "images/COMMUNICATION/Communication2.png" zoom 0.5
+        draggroup:
+            drag:
+                drag_name "x"
+                draggable False
+                droppable True
+                xpos 503 
+                ypos 3
+                image "images/ASSORTED ICONS/39.png" zoom 0.5 xalign 0.99 yalign 0.01
+
+            drag:
+                drag_name "clipster"
+                draggable True 
+                dragged drag_placed
+                xpos 222 
+                ypos 51
+                image "images/COMMUNICATION/Communication2.png" zoom 0.5
 
         input color "#000" size 8 font "assets/ChicagoFLF.ttf" xpos 175 ypos 82 xmaximum 217 ymaximum 200 default content id "id"
 
@@ -589,15 +600,37 @@ screen cmd(character):
         hover "IMAGES/base.png"
         
         hotspot (500, 1, 20, 20) action Jump("desktopy")
+        image "black.png"
+        draggroup:
+            drag:
+                drag_name "x"
+                draggable False
+                droppable True
+                xpos 503 ypos 3
+                image "images/ASSORTED ICONS/39.png" zoom 0.5 #xalign 0.99 yalign 0.01
+
+            drag:
+                drag_name "waldo"
+                draggable True
+                dragged drag_placed
+                ymaximum 55
+                xpos 453 
+                ypos 304
+                image "images/MAC SYSTEM/184.png" 
+
+screen blank(name="black.png", txt="", save_action=None):
+    modal True
+    
+    imagemap:
+        ground "IMAGES/base.png"
+        idle "IMAGES/base.png"
+        hover "IMAGES/base.png"
+        
+        hotspot (500, 1, 20, 20) action If(save_action, true=[save_action, Jump("desktopy")], false=Jump("desktopy"))
         image "images/ASSORTED ICONS/39.png" zoom 0.5 xalign 0.99 yalign 0.01
 
-        image "black.png"
-        drag:
-            draggable True
-            ymaximum 55
-            xpos 453 
-            ypos 304
-            image "images/MAC SYSTEM/184.png" 
+        image name
+        text txt color "#000" size 8 font "assets/ChicagoFLF.ttf" xpos 175 ypos 82 xmaximum 217 ymaximum 200
 
 init python:
     from datetime import datetime
@@ -613,3 +646,12 @@ init python:
     def save_blank():
         persistent.blank_txt = renpy.get_displayable("txt", "id").content
         renpy.save_persistent()
+
+    def drag_placed(drags, drop):
+        if not drop:
+            return
+        
+        store.draggable = drags[0].drag_name
+        store.droppable = drop.drag_name
+
+        return True

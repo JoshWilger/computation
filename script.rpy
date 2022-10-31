@@ -73,12 +73,33 @@ label bsod:
 
     return
 
+label yaai:
+    stop music
+    stop sound
+
+    image exit = "images/ASSORTED ICONS/39.png"
+    $ i = 0
+    while i < 10:
+        play audio "sounds/you-are-an-idiot.mp3" loop
+        show base at truecenter:
+            zoom 0.3
+        show exit:
+            zoom 0.5 xalign 0.99 yalign 0.01
+        pause
+        $ i += 1
+    
+    hide base
+    hide exit
+
+    return
+
 label desktopy(loading=0.0):
     hide screen files
     hide screen desktop
     hide screen txt
     hide screen cmd
     hide screen text_screen
+    hide screen blank
 
     show screen desktop(loading)
 
@@ -107,6 +128,7 @@ label documents:
             call ipsum
         "{image=images/MAC SYSTEM/94.png}\nMysterious File":
             hide screen files
+            # call yaai
         "{image=images/MAC SYSTEM/189.png}\nblank.txt":
             call blank
     
@@ -168,36 +190,73 @@ label cmd:
     hide screen txt
     hide screen cmd
     hide screen text_screen
-    
+    image waldo = "images/MAC SYSTEM/184.png" 
+
     show screen cmd(w)
 
 
     $ commands = ""
     $ i = 0
     $ waldo_intro = ["Tell the computer to do things:", "The computer sees what you said and ignores it.", "Looks like you're relentless.", "Maybe we can work out a deal...", "That is, only if you can manage to drag me out of this waffle.", "I may be able to speak computer, but I unfortunately cannot move."]
+    $ waldo_escaped = False
 
-    while True:
-        $ commands += renpy.input(waldo_intro[i % len(waldo_intro)]) + "\n"
-        show screen text_screen(commands, cps=0, xalign=0.03, yalign=0.08, color="#FFF")
+    while not waldo_escaped:
+        $ command = renpy.input(waldo_intro[i % len(waldo_intro)])
+        if command:
+            hide screen text_screen
+            hide waldo
+            $ waldo_escaped = True
+        else:
+            $ commands += command  + "\n"
+            show screen text_screen(commands, cps=0, xalign=0.03, yalign=0.08, color="#FFF")
+            
+
         $ i += 1
+
+    hide screen cmd
+    hide screen text_screen
+    show screen blank
+    "Weee!"
 
     return
 
 label clipster_intro:
+    call check_escape
     "It looks like you're struggling to create a new line..."
+    call check_escape
     "That's okay because seeing dialogue appear is much more interesting."
+    call check_escape
     "..."
+    call check_escape
     "Oh, you must be wondering who's talking."
+    call check_escape
     "Maybe pick me up and make me more visible so we can have a proper conversation."
+    call check_escape
     c "My name is Clipster. An assister to your clipping needs!"
+    call check_escape
     c "I mean.... I'm just here to help you out with writing documents and such."
-    c "But, I wouldn't mind helping you do whatever you're here for..."
+    call check_escape
+    c "But, I wouldn't mind helping you do whatever you're here for."
+    call check_escape
     c "What's that? You don't know why you're here?"
+    call check_escape
     c "Strange..."
+    call check_escape
     c "Maybe you could help me then?"
+    call check_escape
     c "I heard there's a way to get us out of these waffles."
+    call check_escape
     c "Let's get a move on. See any exits?"
+    call check_escape
 
+    return
+
+label check_escape:
+    if draggable == "clipster" and droppable == "x":
+        hide screen txt
+        hide screen text_screen
+        show screen blank("txt.png")
+        "Yay!"
     return
 
 label start:
