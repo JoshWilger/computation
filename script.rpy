@@ -15,11 +15,11 @@ image load = "images/Border16.png"
 
 image snippy = "images/ASSORTED ICONS/87.png"
 image clipster = "images/COMMUNICATION/Communication2.png"
-image wally = "images/MAC SYSTEM/184.png" 
+image waldo = "images/MAC SYSTEM/184.png" 
 
 define s = Character("Snippy", ctc = "ctc_animation", ctc_position = "fixed")
 define c = Character("Clipster", image="images/COMMUNICATION/Communication2.png")
-define w = Character("Wally", image="images/MAC SYSTEM/184.png", screen="cmd")
+define w = Character("Waldo", image="images/MAC SYSTEM/184.png", screen="cmd")
 
 define persistent.welcome_txt = "Welcome to Waffles! We're glad your here and wish you the best with the use of our product!"
 define persistent.ipsum_txt = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ultricies, diam id vestibulum viverra, purus urna commodo dolor, sit amet vulputate mauris lorem nec lorem. Donec dapibus eget mauris ut malesuada. Praesent tincidunt enim nisi, in pulvinar mi tincidunt et. Phasellus at ultrices sem. Etiam eu purus lacus. Nunc ex nisi, volutpat ac tincidunt sed, pretium eu leo. Ut sodales euismod diam, et gravida nisi mattis at. Ut sed tortor efficitur dolor dignissim ultricies."
@@ -36,7 +36,8 @@ label bootup:
     show logo_background:
         fit "cover"
     show logo at truecenter:
-        zoom 1.6
+        zoom 2.0
+        yalign 0.4
     show load at left:
         xzoom 2.0
         block:
@@ -67,6 +68,7 @@ label bsod:
     pause
     hide text
     hide blue
+    stop sound
     pause 2.0
 
     return
@@ -77,8 +79,6 @@ label desktopy(loading=0.0):
     hide screen txt
     hide screen cmd
     hide screen text_screen
-    hide clipster
-    hide wally
 
     show screen desktop(loading)
 
@@ -97,8 +97,6 @@ label documents:
     hide screen desktop
     hide screen files
     hide screen txt
-    hide clipster
-    hide wally
 
     show screen files("documents")
     
@@ -134,6 +132,7 @@ label welcome:
 
     while True:
         "Here is a warm welcome from those at Waffles Inc.!"
+        call clipster_intro
 
     return
 
@@ -146,6 +145,7 @@ label ipsum:
 
     while True:
         "This is a meaningless text file. Hope you can read Latin!"
+        call clipster_intro
 
     return
 
@@ -158,6 +158,8 @@ label blank:
 
     while True:
         "A blank page is an opportunity for creativity..."
+        call clipster_intro
+
     return
 
 label cmd:
@@ -171,9 +173,30 @@ label cmd:
 
 
     $ commands = ""
+    $ i = 0
+    $ waldo_intro = ["Tell the computer to do things:", "The computer sees what you said and ignores it.", "Looks like you're relentless.", "Maybe we can work out a deal...", "That is, only if you can manage to drag me out of this waffle.", "I may be able to speak computer, but I unfortunately cannot move."]
+
     while True:
-        $ commands += renpy.input("Tell the computer to do things:") + "\n"
+        $ commands += renpy.input(waldo_intro[i % len(waldo_intro)]) + "\n"
         show screen text_screen(commands, cps=0, xalign=0.03, yalign=0.08, color="#FFF")
+        $ i += 1
+
+    return
+
+label clipster_intro:
+    "It looks like you're struggling to create a new line..."
+    "That's okay because seeing dialogue appear is much more interesting."
+    "..."
+    "Oh, you must be wondering who's talking."
+    "Maybe pick me up and make me more visible so we can have a proper conversation."
+    c "My name is Clipster. An assister to your clipping needs!"
+    c "I mean.... I'm just here to help you out with writing documents and such."
+    c "But, I wouldn't mind helping you do whatever you're here for..."
+    c "What's that? You don't know why you're here?"
+    c "Strange..."
+    c "Maybe you could help me then?"
+    c "I heard there's a way to get us out of these waffles."
+    c "Let's get a move on. See any exits?"
 
     return
 
@@ -181,14 +204,13 @@ label start:
     play sound "sounds/office_computer_load_on.mp3" volume 0.5
     queue sound "sounds/office_computer_load_hum.mp3" loop volume 0.5
     call bootup
-    # play music "sounds/wricken__computer-startup-music.mp3"
     stop sound fadeout 2.0
     play audio ["<silence 2.0>", "sounds/wricken__computer-startup-music.mp3"] noloop volume 1.2
     queue music ["<silence 10.0>", "sounds/fudgedubnofunk.mp3"]
     call desktopy
     stop sound
     stop music
-    play sound ""
+    play sound "sounds/bsod.mp3" loop
     call bsod
 
     return

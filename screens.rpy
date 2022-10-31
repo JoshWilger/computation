@@ -574,7 +574,9 @@ screen txt(content, save_action):
         image "images/ASSORTED ICONS/39.png" zoom 0.5 xalign 0.99 yalign 0.01
 
         image "txt.png"
-        image "images/COMMUNICATION/Communication2.png" xpos 222 ypos 51 zoom 0.5
+        drag:
+            draggable True xpos 222 ypos 51
+            image "images/COMMUNICATION/Communication2.png" zoom 0.5
 
         input color "#000" size 8 font "assets/ChicagoFLF.ttf" xpos 175 ypos 82 xmaximum 217 ymaximum 200 default content id "id"
 
@@ -590,7 +592,12 @@ screen cmd(character):
         image "images/ASSORTED ICONS/39.png" zoom 0.5 xalign 0.99 yalign 0.01
 
         image "black.png"
-        image "images/MAC SYSTEM/184.png" xalign 0.9 yalign 0.9
+        drag:
+            draggable True
+            ymaximum 55
+            xpos 453 
+            ypos 304
+            image "images/MAC SYSTEM/184.png" 
 
 init python:
     from datetime import datetime
