@@ -1,6 +1,4 @@
-﻿init python:
-    from datetime import datetime
-
+﻿
 # This is the base image which displays the Mac OS8 window frame
 image UI = "images/base.png"
 # This is a plan white background that goes over the UI
@@ -11,9 +9,9 @@ image ctc_animation = Animation("images/ctcwhite.png", 0.5, "images/ctcblack.png
 # Creates the narrator as a character to enable the ctc animation
 # define narrator = Character(ctc = "ctc_animation", ctc_position = "fixed")
 
-image logo = "images/ODDS AND ENDS/Odds58.png"
-image logo_background = "images/CARDS/Dynamic.png"
-image load = "images/BORDERS/Border16.png"
+image logo = "images/logo.png"
+image logo_background = "images/pexels-mikhail-nilov.png"
+image load = "images/Border16.png"
 
 image snippy = "images/ASSORTED ICONS/87.png"
 image clipster = "images/COMMUNICATION/Communication2.png"
@@ -30,17 +28,22 @@ define persistent.blank_txt = ""
 # The game starts here.
 
 label bootup:
-    pause 1.0
+    pause 3.0
+    show renpy at truecenter with Fade(0.0, 0.0, 10.0)
+    pause 6.0
+    hide renpy
+    pause 2.0
     show logo_background:
         fit "cover"
-    show logo at truecenter
+    show logo at truecenter:
+        zoom 1.6
     show load at left:
         xzoom 2.0
         block:
             xalign 0.05
             linear 3.0 xalign 1.0
             repeat
-    pause 12.0
+    pause 15.0
     hide load
     hide logo
     hide logo_background
@@ -49,6 +52,9 @@ label bootup:
     pause 4.0
     hide screen text_screen
     pause 2.0
+    show cyan
+    pause 2.0
+    hide cyan
 
     return
 
@@ -172,8 +178,17 @@ label cmd:
     return
 
 label start:
+    play sound "sounds/office_computer_load_on.mp3" volume 0.5
+    queue sound "sounds/office_computer_load_hum.mp3" loop volume 0.5
     call bootup
+    # play music "sounds/wricken__computer-startup-music.mp3"
+    stop sound fadeout 2.0
+    play audio ["<silence 2.0>", "sounds/wricken__computer-startup-music.mp3"] noloop volume 1.2
+    queue music ["<silence 10.0>", "sounds/fudgedubnofunk.mp3"]
     call desktopy
+    stop sound
+    stop music
+    play sound ""
     call bsod
 
     return

@@ -185,6 +185,8 @@ screen main_menu():
     # This ensures that any other menu screen is replaced.
     tag menu
 
+    $ renpy.music.play("sounds/warm-anolog-tech-synth.mp3", channel="music", fadein=20.0, loop=True)
+    
     #You can replace the default main menu here and reconfigure the hotspots for any buttons. Make sure to clear the cache afterwards.
     imagemap:
         ground "images/menuground.png"
@@ -533,7 +535,7 @@ screen desktop(loading=0.0):
         idle "images/cyan.png"
         hover "images/cyan.png"
 
-        image "images/BORDERS/Border20.png" yzoom 3.0 xzoom 1.5 yalign 1.021 delay loading
+        image "images/choicehover.png" yzoom 1.6 xzoom 2.45 xalign 0.5 yalign 1.021 delay loading
         # pause 0.1
         image "images/BUTTONS & MENUS/RECTANGLE BUTTON SHADOW.png" xalign 0.005 yalign 0.993 delay loading
         # pause 0.1
