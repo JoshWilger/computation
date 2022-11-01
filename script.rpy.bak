@@ -178,11 +178,11 @@ label desktopy(loading=0.0):
 
         menu:
             "{image=images/MAC SYSTEM/Mac20.png}\nDocuments":
-                call documents from _call_documents
+                call documents
             "{image=images/MAC SYSTEM/221.png}\nJunk":
-                call junk from _call_junk
+                call junk
             "{image=images/MAC SYSTEM/187.png}\nCommand Input":
-                call cmd from _call_cmd
+                call cmd
 
     # "This is your desktop. You'll be seeing this a lot, as it is basically the home screen of the computer!"
     return
@@ -196,14 +196,14 @@ label documents:
     
     menu:
         "{image=images/MAC SYSTEM/189.png}\nWelcome to Waffles.txt":
-            call welcome from _call_welcome
+            call welcome
         "{image=images/MAC SYSTEM/189.png}\nLorem Ipsum.txt":
-            call ipsum from _call_ipsum
+            call ipsum
         "{image=images/MAC SYSTEM/94.png}\nMysterious File":
             hide screen files
             # call yaai
         "{image=images/MAC SYSTEM/189.png}\nblank.txt":
-            call blank from _call_blank
+            call blank
     
     # "Here is where all your documents are kept!"
     return
@@ -227,7 +227,7 @@ label welcome:
 
     while not clipster_escaped:
         "Here is a warm welcome from those at Waffles Inc.!"
-        call clipster_intro from _call_clipster_intro
+        call clipster_intro
 
     hide screen txt
     hide screen text_screen
@@ -245,7 +245,7 @@ label ipsum:
 
     while not clipster_escaped:
         "This is a meaningless text file. Hope you can read Latin!"
-        call clipster_intro from _call_clipster_intro_1
+        call clipster_intro
 
     hide screen txt
     hide screen text_screen
@@ -263,7 +263,7 @@ label blank:
 
     while not clipster_escaped:
         "A blank page is an opportunity for creativity..."
-        call clipster_intro from _call_clipster_intro_2
+        call clipster_intro
 
     hide screen txt
     hide screen text_screen
@@ -307,33 +307,33 @@ label cmd:
     return
 
 label clipster_intro:
-    call check_escape from _call_check_escape
+    call check_escape
     "It looks like you're struggling to create a new line..."
-    call check_escape from _call_check_escape_1
+    call check_escape
     "That's okay because seeing dialogue appear is much more interesting."
-    call check_escape from _call_check_escape_2
+    call check_escape
     "..."
-    call check_escape from _call_check_escape_3
+    call check_escape
     "Oh, you must be wondering who's talking."
-    call check_escape from _call_check_escape_4
+    call check_escape
     "Maybe pick me up and make me more visible so we can have a proper conversation."
-    call check_escape from _call_check_escape_5
+    call check_escape
     c "My name is Clipster. An assister to your clipping needs!"
-    call check_escape from _call_check_escape_6
+    call check_escape
     c "I mean.... I'm just here to help you out with writing documents and such."
-    call check_escape from _call_check_escape_7
+    call check_escape
     c "But, I wouldn't mind helping you do whatever you're here for."
-    call check_escape from _call_check_escape_8
+    call check_escape
     c "What's that? You don't know why you're here?"
-    call check_escape from _call_check_escape_9
+    call check_escape
     c "Strange..."
-    call check_escape from _call_check_escape_10
+    call check_escape
     c "Maybe you could help me then?"
-    call check_escape from _call_check_escape_11
+    call check_escape
     c "I heard there's a way to get us out of these waffles."
-    call check_escape from _call_check_escape_12
+    call check_escape
     c "Let's get a move on. See any exits?"
-    call check_escape from _call_check_escape_13
+    call check_escape
 
     return
 
@@ -350,15 +350,15 @@ label check_escape:
 label start:
     play sound "sounds/office_computer_load_on.mp3" volume 0.5
     queue sound "sounds/office_computer_load_hum.mp3" loop volume 0.5
-    call bootup from _call_bootup
+    call bootup
     stop sound fadeout 2.0
     play audio ["<silence 2.0>", "sounds/wricken__computer-startup-music.mp3"] noloop volume 1.2
     queue music ["<silence 10.0>", "sounds/fudgedubnofunk.mp3"]
-    call desktopy from _call_desktopy
+    call desktopy
     stop sound
     stop music
     play sound "sounds/bsod.mp3" loop
-    call bsod from _call_bsod
+    call bsod
 
     return
 

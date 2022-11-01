@@ -14,7 +14,7 @@ init -1 python hide:
     ## cheat using developer tools.
     #TODO: turn off developer tools for release
 
-    config.developer = True
+    config.developer = False
 
     ## These control the width and height of the screen.
 
