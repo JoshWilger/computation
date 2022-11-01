@@ -24,6 +24,10 @@ define w = Character("Waldo", image="images/MAC SYSTEM/184.png", screen="cmd")
 define persistent.welcome_txt = "Welcome to Waffles! We're glad your here and wish you the best with the use of our product!"
 define persistent.ipsum_txt = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ultricies, diam id vestibulum viverra, purus urna commodo dolor, sit amet vulputate mauris lorem nec lorem. Donec dapibus eget mauris ut malesuada. Praesent tincidunt enim nisi, in pulvinar mi tincidunt et. Phasellus at ultrices sem. Etiam eu purus lacus. Nunc ex nisi, volutpat ac tincidunt sed, pretium eu leo. Ut sodales euismod diam, et gravida nisi mattis at. Ut sed tortor efficitur dolor dignissim ultricies."
 define persistent.blank_txt = ""
+define droppable = ""
+define draggable = ""
+define waldo_escaped = False
+define clipster_escaped = False
 
 # The game starts here.
 
@@ -93,6 +97,42 @@ label yaai:
 
     return
 
+label credits:
+    show text ("{color=#FFF}{b}Credits{/b} \
+    {vspace=40}Developer and Designer{space=50}Josh Wilger \
+    \
+    {vspace=150} {b} Assets{/b}\
+    {vspace=40} Ren'Py Hypercard Framework by Eliot Gardepe \
+    {vspace=40} Hypercard Graphics Pack by Eliot Gardepe \
+    {vspace=40} Blueberry Background by Mikhail Nilov \
+    {vspace=40} Image recolorization by Josh Wilger \
+    \
+    {vspace=150} {b}Music{/b} \
+    {vspace=40} Menu Music \"Warm Anolog Tech Synth\" by CremeTop \
+    {vspace=40} Gameplay Music \"Fudgedubnofunk\" by Fudgedubnofunk \
+    {vspace=40} Credits Music \"Ctrl-Alt-Delete\" by Fudgedubnofunk \
+    \
+    {vspace=150} {b}Sound Effects{/b} \
+    {vspace=40} Computer switched on and loads by Zapsplat \
+    {vspace=40} Computer startup by Wricken \
+    \
+    {vspace=150} {b}Fonts{/b} \
+    {vspace=40} ChicagoFLF from the Ren'Py Hypercard Framework \
+    {vspace=40} M 8pt from Yandex.Disk \
+    \
+    {vspace=150} {b}Inspiration{/b} \
+    {vspace=40} The nostolgia of Microsoft Windows 98® and old operating systems \
+    \
+    {vspace=200} I hope you enjoyed this game! \
+    {vspace=80} Thanks for playing! \
+    {vspace=200}{/b}"):
+        yalign -0.3
+        linear 50.0 yalign 1.0
+    pause 80.0
+    return
+    # {vspace=40} You are an idiot by Unknown on Archive.org \
+
+
 label desktopy(loading=0.0):
     hide screen files
     hide screen desktop
@@ -152,9 +192,14 @@ label welcome:
 
     show screen txt(persistent.welcome_txt, save_welcome)
 
-    while True:
+    while not clipster_escaped:
         "Here is a warm welcome from those at Waffles Inc.!"
         call clipster_intro
+
+    hide screen txt
+    hide screen text_screen
+    show screen blank("txt.png")
+    "Yay!"
 
     return
 
@@ -165,9 +210,14 @@ label ipsum:
 
     show screen txt(persistent.ipsum_txt, save_ipsum)
 
-    while True:
+    while not clipster_escaped:
         "This is a meaningless text file. Hope you can read Latin!"
         call clipster_intro
+
+    hide screen txt
+    hide screen text_screen
+    show screen blank("txt.png")
+    "Yay!"
 
     return
 
@@ -178,9 +228,14 @@ label blank:
 
     show screen txt(persistent.blank_txt, save_blank)
 
-    while True:
+    while not clipster_escaped:
         "A blank page is an opportunity for creativity..."
         call clipster_intro
+
+    hide screen txt
+    hide screen text_screen
+    show screen blank("txt.png")
+    "Yay!"
 
     return
 
@@ -198,14 +253,12 @@ label cmd:
     $ commands = ""
     $ i = 0
     $ waldo_intro = ["Tell the computer to do things:", "The computer sees what you said and ignores it.", "Looks like you're relentless.", "Maybe we can work out a deal...", "That is, only if you can manage to drag me out of this waffle.", "I may be able to speak computer, but I unfortunately cannot move."]
-    $ waldo_escaped = False
 
     while not waldo_escaped:
         $ command = renpy.input(waldo_intro[i % len(waldo_intro)])
-        if command:
-            hide screen text_screen
-            hide waldo
+        if command and (draggable == "waldo" and droppable == "x"):
             $ waldo_escaped = True
+            hide screen text_screen
         else:
             $ commands += command  + "\n"
             show screen text_screen(commands, cps=0, xalign=0.03, yalign=0.08, color="#FFF")
@@ -253,6 +306,7 @@ label clipster_intro:
 
 label check_escape:
     if draggable == "clipster" and droppable == "x":
+        $ clipster_escaped = True
         hide screen txt
         hide screen text_screen
         show screen blank("txt.png")
@@ -271,6 +325,8 @@ label start:
     stop music
     play sound "sounds/bsod.mp3" loop
     call bsod
+    play music "sounds/CtrlAltDelete.mp3"
+    call credits
 
     return
 
