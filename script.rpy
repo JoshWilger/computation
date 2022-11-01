@@ -19,7 +19,7 @@ image waldo = "images/MAC SYSTEM/184.png"
 
 define s = Character("Snippy", ctc = "ctc_animation", ctc_position = "fixed")
 define c = Character("Clipster", image="images/COMMUNICATION/Communication2.png")
-define w = Character("Waldo", image="images/MAC SYSTEM/184.png", screen="cmd")
+define w = Character("Waldo", image="images/MAC SYSTEM/184.png")
 
 define persistent.welcome_txt = "Welcome to Waffles! We're glad your here and wish you the best with the use of our product!"
 define persistent.ipsum_txt = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ultricies, diam id vestibulum viverra, purus urna commodo dolor, sit amet vulputate mauris lorem nec lorem. Donec dapibus eget mauris ut malesuada. Praesent tincidunt enim nisi, in pulvinar mi tincidunt et. Phasellus at ultrices sem. Etiam eu purus lacus. Nunc ex nisi, volutpat ac tincidunt sed, pretium eu leo. Ut sodales euismod diam, et gravida nisi mattis at. Ut sed tortor efficitur dolor dignissim ultricies."
@@ -129,6 +129,13 @@ label credits:
         yalign -0.3
         linear 50.0 yalign 1.0
     pause 80.0
+    hide screen files
+    hide screen desktop
+    hide screen txt
+    hide screen cmd
+    hide screen text_screen
+    hide screen blank
+    show screen menu_please
     return
     # {vspace=40} You are an idiot by Unknown on Archive.org \
 
@@ -143,13 +150,39 @@ label desktopy(loading=0.0):
 
     show screen desktop(loading)
 
-    menu:
-        "{image=images/MAC SYSTEM/Mac20.png}\nDocuments":
-            call documents
-        "{image=images/MAC SYSTEM/221.png}\nJunk":
-            call junk
-        "{image=images/MAC SYSTEM/187.png}\nCommand Input":
-            call cmd
+    if waldo_escaped and clipster_escaped:
+        pause
+        hide screen files
+        hide screen desktop
+        hide screen txt
+        hide screen cmd
+        hide screen text_screen
+        hide screen blank
+        stop sound
+        stop music
+        play music "sounds/CtrlAltDelete.mp3"
+        jump credits
+    else:
+        if waldo_escaped:
+            "Yay, I'm finally Waffle-free!"
+            "Although this place does still seem pretty boxy..."
+            "Oh, I forgot to properly introduce myself!"
+            w "The name's Waldo."
+            w "I usually just communicate between the user and the computer, but now I'm here to get you out of this place!"
+            w "I think you have to get to the end of this scenario, so let me help you do that."
+            w "I got a friend in Documents that needs your help as well. Maybe that'll get this over with."
+        if clipster_escaped:
+            c "Woah! Look at this place!"
+            c "All it really needs is some more people like me!"
+            c "You should go help my friend in the Command Input. He probably knows why you're here."
+
+        menu:
+            "{image=images/MAC SYSTEM/Mac20.png}\nDocuments":
+                call documents
+            "{image=images/MAC SYSTEM/221.png}\nJunk":
+                call junk
+            "{image=images/MAC SYSTEM/187.png}\nCommand Input":
+                call cmd
 
     # "This is your desktop. You'll be seeing this a lot, as it is basically the home screen of the computer!"
     return
@@ -311,6 +344,7 @@ label check_escape:
         hide screen text_screen
         show screen blank("txt.png")
         "Yay!"
+
     return
 
 label start:
@@ -325,8 +359,6 @@ label start:
     stop music
     play sound "sounds/bsod.mp3" loop
     call bsod
-    play music "sounds/CtrlAltDelete.mp3"
-    call credits
 
     return
 

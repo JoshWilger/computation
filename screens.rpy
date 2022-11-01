@@ -549,6 +549,9 @@ screen desktop(loading=0.0):
             yalign 0.98 # 0.984
         # pause 0.1
 
+        if waldo_escaped and clipster_escaped:
+            text "You Win!" at truecenter size 30
+
 screen files(type):
     modal True
     
@@ -631,6 +634,9 @@ screen blank(name="black.png", txt="", save_action=None):
 
         image name
         text txt color "#000" size 8 font "assets/ChicagoFLF.ttf" xpos 175 ypos 82 xmaximum 217 ymaximum 200
+
+screen menu_please:
+    on "show" action MainMenu(confirm=False)
 
 init python:
     from datetime import datetime
